@@ -4,8 +4,26 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  void answerQuestion() {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  int _qstIndex = 0;
+  List<String> _qsts = [
+    "what is your favorite color ??",
+    "what is your favorite animal ??",
+    "what is your favorite glass ??",
+    "what is your favorite sport ??",
+  ];
+
+  void _answerQuestion() {
+    setState(() {
+      _qstIndex += 1;
+    });
     print("answer choosenn!!!");
   }
 
@@ -19,18 +37,18 @@ class MyApp extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Text("The question ...?"),
+          Text(_qsts[_qstIndex]),
           RaisedButton(
             child: Text("Answer 1"),
-            onPressed: answerQuestion,
+            onPressed: _answerQuestion,
           ),
           RaisedButton(
             child: Text("Answer 1"),
-            onPressed: answerQuestion,
+            onPressed: _answerQuestion,
           ),
           RaisedButton(
             child: Text("Answer 1"),
-            onPressed: answerQuestion,
+            onPressed: _answerQuestion,
           ),
         ],
       ),
