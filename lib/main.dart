@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
-import "./question.dart";
+import "./quiz.dart";
+import "./result.dart";
 
 void main() {
   runApp(MyApp());
@@ -14,18 +15,26 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _qstIndex = 0;
-  List<String> _qsts = [
-    "what is your favorite color ??",
-    "what is your favorite animal ??",
-    "what is your favorite glass ??",
-    "what is your favorite sport ??",
+  var _qsts = [
+    {
+      "questionText": "What's your favorite color ?",
+      "answers": ["Black", "Red", "Blue", "Green"]
+    },
+    {
+      "questionText": "What's your favorite animal ?",
+      "answers": ["Dog", "Cat", "Snake", "Rabbit"]
+    },
+    {
+      "questionText": "What's your favorite friend ?",
+      "answers": ["Twelve", "Khalid", "Imran", "Motamanyak"]
+    },
   ];
 
   void _answerQuestion() {
     setState(() {
       _qstIndex += 1;
     });
-    print("answer choosenn!!!");
+    // print("answer choosenn!!!");
   }
 
   @override
@@ -36,23 +45,9 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text("My first app"),
       ),
-      body: Column(
-        children: [
-          Question(_qsts[_qstIndex]),
-          RaisedButton(
-            child: Text("Answer 1"),
-            onPressed: _answerQuestion,
-          ),
-          RaisedButton(
-            child: Text("Answer 1"),
-            onPressed: _answerQuestion,
-          ),
-          RaisedButton(
-            child: Text("Answer 1"),
-            onPressed: _answerQuestion,
-          ),
-        ],
-      ),
+      body: _qstIndex < _qsts.length
+          ? Quiz(_answerQuestion, _qsts, _qstIndex)
+          : Result(),
     ));
   }
 }
