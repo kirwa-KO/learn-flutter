@@ -18,19 +18,37 @@ class _MyAppState extends State<MyApp> {
   var _qsts = [
     {
       "questionText": "What's your favorite color ?",
-      "answers": ["Black", "Red", "Blue", "Green"]
+      "answers": [
+        {"text": "Black", "score": 30},
+        {"text": "Red", "score": 60},
+        {"text": "Yellow", "score": 10},
+        {"text": "Blue", "score": 100},
+      ]
     },
     {
       "questionText": "What's your favorite animal ?",
-      "answers": ["Dog", "Cat", "Snake", "Rabbit"]
+      "answers": [
+        {"text": "Cat", "score": 30},
+        {"text": "Dog", "score": 60},
+        {"text": "Snake", "score": 10},
+        {"text": "Eagle", "score": 100},
+      ]
     },
     {
       "questionText": "What's your favorite friend ?",
-      "answers": ["Twelve", "Khalid", "Imran", "Motamanyak"]
+      "answers": [
+        {"text": "Twelve", "score": 30},
+        {"text": "Kirwa", "score": 60},
+        {"text": "Motamanyak", "score": 10},
+        {"text": "Seven", "score": 100},
+      ]
     },
   ];
 
-  void _answerQuestion() {
+  int _totalscore = 0;
+
+  void _answerQuestion(int score) {
+    _totalscore += score;
     setState(() {
       _qstIndex += 1;
     });
@@ -47,7 +65,7 @@ class _MyAppState extends State<MyApp> {
       ),
       body: _qstIndex < _qsts.length
           ? Quiz(_answerQuestion, _qsts, _qstIndex)
-          : Result(),
+          : Result(_totalscore),
     ));
   }
 }
