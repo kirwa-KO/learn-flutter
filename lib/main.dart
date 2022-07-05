@@ -1,39 +1,40 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
+import './widgets/user_transition.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  void answerQuestion() {
-    print("answer choosenn!!!");
-  }
-
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(home: Text("Hello World !!!"));
     return MaterialApp(
-        home: Scaffold(
+      title: 'Flutter App',
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(
-        title: Text("My first app"),
+        title: Text('Flutter App'),
       ),
-      body: Column(
-        children: [
-          Text("The question ...?"),
-          RaisedButton(
-            child: Text("Answer 1"),
-            onPressed: answerQuestion,
-          ),
-          RaisedButton(
-            child: Text("Answer 1"),
-            onPressed: answerQuestion,
-          ),
-          RaisedButton(
-            child: Text("Answer 1"),
-            onPressed: answerQuestion,
-          ),
-        ],
-      ),
-    ));
+      body: SingleChildScrollView(
+		child: Column(
+			mainAxisAlignment: MainAxisAlignment.start,
+			crossAxisAlignment: CrossAxisAlignment.start,
+			children: [
+			  Container(
+				width: double.infinity,
+				child: Card(
+				  color: Colors.blue,
+				  child: Text("Charts"),
+				),
+			  ),
+			  UserTransition()
+			]),
+	  ),
+    );
   }
 }
