@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
-import 'package:intl/intl_standalone.dart';
 import '../models/Transition.dart';
 
 class TransitionList extends StatelessWidget {
@@ -10,39 +9,47 @@ class TransitionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
-      child: (Column(
-        children: this.trans.map((tran) {
-          return (Card(
-            child: Row(children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.orange, width: 1)),
-                child: Text('\$${tran.amount}',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.orange)),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    tran.title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                  Text(
-                    DateFormat.yMMMd().format(tran.date),
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  )
-                ],
+        height: 300,
+        child: this.trans.isEmpty
+            ? Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'No transitions added yet..!!',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 200,
+                      child: Image.asset(
+                        'assets/images/waiting.png',
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  ],
+                ),
               )
-            ]),
-          ));
-        }).toList(),
-      )),
-    );
+            : ListView.builder(
+                itemBuilder: (ctx, index) {
+                  return Card(
+					margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+					child: (ListTile(
+					  leading: CircleAvatar(
+						radius: 30,
+						child: Padding(
+						  padding: EdgeInsets.all(8.0),
+						  child: FittedBox(child: Text('\$${this.trans[index].amount}')),
+						),
+					  ),
+									title: Text(this.trans[index].title, style: Theme.of(context).textTheme.titleMedium,),
+									subtitle: Text(DateFormat.yMMMd().format(this.trans[index].date)),
+					)),
+				  );
+                },
+                itemCount: this.trans.length,
+              ));
   }
 }
