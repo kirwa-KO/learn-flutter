@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/data/ProductsData.dart';
-import 'package:flutter_complete_guide/providers/Product.dart';
+import 'package:flutter_complete_guide/providers/CartProvider.dart';
+// import 'package:flutter_complete_guide/data/ProductsData.dart';
+// import 'package:flutter_complete_guide/providers/Product.dart';
 import 'package:flutter_complete_guide/providers/ProductsProvider.dart';
+import 'package:flutter_complete_guide/screens/CartScreen.dart';
 import 'package:flutter_complete_guide/widgets/ProductItem.dart';
+import 'package:flutter_complete_guide/widgets/badge.dart';
 import 'package:provider/provider.dart';
 
 enum FilterOptions { Favorites, All }
@@ -47,6 +50,18 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
                       value: FilterOptions.All,
                     )
                   ]),
+          Consumer<CartProvider>(
+            builder: (_, cart, ch) => Badge(
+              child: ch,
+              value: cart.itemsCount.toString(),
+            ),
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+            ),
+          )
         ],
       ),
       body: GridView.builder(
