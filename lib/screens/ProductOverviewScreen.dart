@@ -4,6 +4,7 @@ import 'package:flutter_complete_guide/providers/CartProvider.dart';
 // import 'package:flutter_complete_guide/providers/Product.dart';
 import 'package:flutter_complete_guide/providers/ProductsProvider.dart';
 import 'package:flutter_complete_guide/screens/CartScreen.dart';
+import 'package:flutter_complete_guide/widgets/AppDrawer.dart';
 import 'package:flutter_complete_guide/widgets/ProductItem.dart';
 import 'package:flutter_complete_guide/widgets/badge.dart';
 import 'package:provider/provider.dart';
@@ -64,6 +65,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           )
         ],
       ),
+	  drawer: AppDrawer(),
       body: GridView.builder(
         padding: const EdgeInsets.all(10),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
